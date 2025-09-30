@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CorDex</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- ‑‑‑‑‑‑  STYLE SHEETS  ‑‑‑‑‑‑  -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ============================================================ -->
+  <!--  PASSWORD GATE (commented out - no longer needed)            -->
+  <!-- ============================================================ -->
+  <!-- 
+  <div id="auth" style="text-align:center;margin-top:20vh;">
+    <h2>Enter paper‑ID to access the site</h2>
+    <input type="password" id="pwd" placeholder="Paper ID" />
+    <button onclick="checkPassword()" style="margin-left:8px;">Submit</button>
+    <p id="msg" style="color:#c00;margin-top:6px;"></p>
+  </div>
+  -->
+
+  <!-- ============================================================ -->
+  <!--  MAIN CONTENT (now displayed by default)                     -->
+  <!-- ============================================================ -->
+  <div id="content" style="display:block;">
+    <!-- HERO -->
+    <header class="full-page-image" id="hero">
+      <video id="bg-video" preload="metadata" autoplay muted playsinline loop>
+        <source src="assets/videos_v2/demo_syringe_2x.MOV" type="video/mp4" />
+      </video>
+      <div class="overlay"></div>
+      <div class="bottom-overlay" style="padding:0 24px;">
+        <h1>Generate, Transfer, Adapt:<br/>Learning Functional Dexterous Grasping from a Single Human Demonstration</h1>
+      </div>
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" onclick="scrollToContent()">
+        ↓
+      </div>
+    </header>
+    
+    <!-- MAIN CONTENT BODY -->
+    <main class="main-content">
+      <!-- <div class="hero-text">Versatile Loco-Manipulation through Flexible Interlimb Coordination</div> -->
+
+      <div class="sub-hero-text">Generate, Transfer, Adapt: Learning Functional Dexterous Grasping from a Single Human Demonstration</div>
+
+      <div class="authors">ICRA 2026 Submission 4941<br/></div>
+
+      <!-- <div class="quick-links"><a href="paper.pdf" target="_blank">[pdf]</a><a href="#" onclick="return false;">[arXiv (after review)]</a><a href="#" onclick="return false;">[code (after review)]</a></div> -->
+
+      <div class="tagline" id="abstract">Abstract</div>
+      <div class="section">
+        <p>
+            Functional grasping with dexterous robotic hands is a key capability for enabling tool use and complex manipulation, yet progress has been constrained by two persistent bottlenecks: the scarcity of large-scale datasets and the absence of integrated semantic and geometric reasoning in learned models. In this work, we present CorDex, a framework that robustly learns dexterous functional grasps of novel objects from synthetic data generated from just a single human demonstration. At the core of our approach is a correspondence-based data engine that generates diverse, high-quality training data in simulation. Based on the human demonstration, our data engine generates diverse object instances of the same category, transfers the expert grasp to the generated objects through correspondence estimation, and adapts the grasp through optimization. Building on the generated data, we introduce a multimodal prediction network that integrates visual and geometric information. By devising a local–global fusion module and an importance-aware sampling mechanism, we enable robust and computationally efficient prediction of functional dexterous grasps. Through extensive experiments across various object categories, we demonstrate that CorDex generalizes well to unseen object instances and significantly outperforms state-of-the-art baselines.
+        </p>
+      </div>
+
+    <div class="tagline" id="video-gallery-title">Functional Dexterous Grasping</div>
+    <!-- End Video Gallery Section -->
+    <div class="section">
+      <!-- <img src="assets/images/method.gif" alt="Methods overview diagram" style="width: 100%; margin: 20px 0 10px 0;" loading="eager" decoding="async"> -->
+      <video class="gallery-video-cordex" src="assets/videos_v2/fun_grasping.m4v" autoplay muted playsinline loop style="width:100%; max-width:1000px; display:block; margin:0 auto;"></video>
+      <p class="figure-caption">
+      <b>Functional Dexterous Grasping</b> requires the robot must not only establish a stable hold on the object but also meaningfully interact with its task-relevant part in order to realize its intended functionality.
+      This capability enables robots to perform complex tool use and precise manipulation.
+      </p>
+    </div>
+
+    <div class="tagline" id="methods">Methods</div>
+    <div class="section">
+      <!-- <img src="assets/images/method.gif" alt="Methods overview diagram" style="width: 100%; margin: 20px 0 10px 0;" loading="eager" decoding="async"> -->
+      <video class="gallery-video-cordex" src="assets/videos_v2/method.m4v" autoplay muted playsinline loop style="width:100%; max-width:1000px; display:block; margin:0 auto;"></video>
+      <p class="figure-caption">
+        <!-- <b>Reinforcement Learning for Interlimb Coordination (ReLIC):</b> Based on various types of task specifications, ReLIC enables the
+        robot to perform versatile loco-manipulation. Conditioned on the dynamic assignment of limb functions,
+        the ReLIC controller generates the actions through the interplay between a model-based module that
+        prioritizes task success, and an RL policy that robustly maintain stable gaits in accordance
+        with the manipulation behaviors. This design decouples the two challenging subproblems without
+        relying on rigid heuristics or sacrificing inter-module coordination. -->
+        <b>CorDex data engine.</b> We generate diverse, high-quality functional grasps for novel objects from a single human demonstration through three stages: 
+        (a) <b>Generate</b>: diversify objects within the task category by creating 3D models from Internet-retrieved images. 
+        (b) <b>Transfer</b>: extract 3D fingertip contacts from the demonstration via scene and hand reconstruction, then transfer them to novel objects using a correspondence-based 2D–3D pipeline that projects, matches, and aggregates contact points into reliable 3D candidates on generated objects. 
+        (c) <b>Adapt</b>: apply physics-informed grasp adaptation to convert candidate contact points into embodiment-specific grasps that satisfy both functionality and stability considerations, yielding diverse and high-quality functional grasp data.
+      </p>
+    </div>
+
+    <div class="section">
+      <!-- <img src="assets/images/method.gif" alt="Methods overview diagram" style="width: 100%; margin: 20px 0 10px 0;" loading="eager" decoding="async"> -->
+      <video class="gallery-video-cordex" src="assets/videos_v2/policy.m4v" autoplay muted playsinline loop style="width:100%; max-width:1000px; display:block; margin:0 auto;"></video>
+      <p class="figure-caption">
+        <b>CorDex grasp prediction network.</b> 
+        The network integrates semantic and geometric information from single-view RGB-D input to predict functional dexterous grasps for novel objects. 
+        Image and point cloud features are first encoded into pointwise features.
+         <!-- and processed by a transformer.  -->
+        To boost performance and computational efficiency, we introduce an importance-aware sampling mechanism that samples points around contact areas. 
+        Given the sampled points, a local–global fusion module refines local details and encodes holistic object context through global attention. 
+        Finally, a distance matrix between the robot hand and object points is decoded via cross-attention and optimized to obtain the final grasp.
+      </p>
+    </div>
+
+    <div class="tagline" id="video-gallery-title">CorDex Dataset</div>
+    <!-- End Video Gallery Section -->
+    <div class="section">
+      <!-- <img src="assets/images/method.gif" alt="Methods overview diagram" style="width: 100%; margin: 20px 0 10px 0;" loading="eager" decoding="async"> -->
+      <video class="gallery-video-cordex" src="assets/videos_v2/dataset.m4v" autoplay muted playsinline loop style="width:100%; max-width:1000px; display:block; margin:0 auto;"></video>
+      <p class="figure-caption">
+        We generate a functional dexterous grasp dataset consisting of 900 objects, 1.1 million images,
+        and 11 million image–grasp pairs. The dataset spans across nine tasks and two different embodiments of different DoFs (Shadow and Inspire). 
+      </p>
+    </div>
+    
+    <!-- Start of Failures -->
+    <div class="tagline" id="failures">Real-World Execution</div>
+    <div class="video-gallery-section" id="gallery-section-failures">
+      <div class="video-gallery-container">
+        <div class="video-gallery" id="failures">
+          <!-- Videos remain here - ADD autoplay -->
+          <video class="gallery-video" src="assets/videos_v2/exe_drill_1.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_drill_2.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_drill_3.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_gluegun_1.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_gluegun_2.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_gluegun_3.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_hammer_1.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_hammer_2.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_hammer_3.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_pipette_1.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_pipette_2.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_pipette_3.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_stapler_1.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_stapler_2.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_stapler_3.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_bottle_1.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_bottle_2.mov" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/exe_bottle_3.mov" autoplay muted playsinline loop></video>
+        </div>
+      </div>
+      <!-- Container for the caption AND buttons -->
+      <div class="gallery-caption-container">
+        <!-- Move button controls INSIDE caption container -->
+        <div class="gallery-nav-controls">
+            <button class="gallery-nav left" id="scrollLeftBtnFailures">&lt;</button>
+            <button class="gallery-nav right" id="scrollRightBtnFailures">&gt;</button>
+        </div>
+        <!-- Caption text -->
+        <p class="figure-caption gallery-caption">
+          CorDex generalizes to unseen objects in real-world and achieves an overall success rate of 69% across six tasks.
+        </p>
+      </div>
+    </div>
+    <!-- End of Failures -->
+
+    <div class="tagline" id="video-gallery-title-contact">Application: Facilitate Tool Usage</div>
+
+    <!-- Video Gallery Section - mobile interlimb coordination -->
+    <div class="video-gallery-section" id="gallery-section-contactpoints">
+      <div class="video-gallery-container">
+        <div class="video-gallery" id="contactPointsRow1">
+          <!-- Videos remain here - ADD autoplay -->
+          <video class="gallery-video" src="assets/videos_v2/demo_drill.m4v" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/demo_hammer.m4v" autoplay muted playsinline loop></video>
+          <!-- Add more videos as needed, ensuring they have autoplay muted loop -->
+        </div>
+        <div class="video-gallery" id="contactPointsRow2">
+          <!-- Videos remain here - ADD autoplay -->
+          <video class="gallery-video" src="assets/videos_v2/demo_cleanbottle.m4v" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="assets/videos_v2/demo_syringe.m4v" autoplay muted playsinline loop></video>
+          <!-- Add more videos as needed, ensuring they have autoplay muted loop -->
+        </div>
+      </div>
+      <!-- Container for the caption AND buttons -->
+      <div class="gallery-caption-container">
+          <!-- Move button controls INSIDE caption container -->
+          <!-- <div class="gallery-nav-controls">
+              <button class="gallery-nav left" id="scrollLeftBtnMobileInterlimb">&lt;</button>
+              <button class="gallery-nav right" id="scrollRightBtnMobileInterlimb">&gt;</button>
+          </div> -->
+          <!-- Caption text -->
+          <p class="figure-caption gallery-caption">
+              CorDex enables the robot to functional grasp and use various tools to perform complex tasks. After grasping the tool, teleoperation is used to control the robot to complete the task.
+          </p>
+      </div>
+    </div>
+    
+    <!-- End of main content -->
+    </main>
+    <footer class="footer">© Anonymous Authors.</footer>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  JS                                                          -->
+  <!-- ============================================================ -->
+  <script src="assets/js/password.js"></script>
+  <script src="assets/js/full_screen_video.js"></script>
+  <script src="assets/js/scroll_button.js"></script>
+</body>
+</html>
